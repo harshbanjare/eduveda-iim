@@ -1,4 +1,24 @@
+"use client";
+
+import { ChangeEvent, FormEvent, useState } from "react";
 import { heroStats } from "../landing-page-data";
+
+const EDUVEDA_IIM_LEADS_URL =
+  "https://backend.teams.eduveda.academy/eduveda-iim-leads/public";
+
+type LeadUserType = "student" | "working_professional";
+
+interface HeroLeadFormState {
+  fullName: string;
+  email: string;
+  phone: string;
+  userType: LeadUserType | "";
+}
+
+interface HeroLeadResponse {
+  success: boolean;
+  message: string;
+}
 
 function VideoIcon() {
   return (
@@ -37,6 +57,78 @@ function BadgeIcon() {
 }
 
 export function HeroSection() {
+  const [form, setForm] = useState<HeroLeadFormState>({
+    fullName: "",
+    email: "",
+    phone: "",
+    userType: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const updateField =
+    (field: keyof HeroLeadFormState) =>
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setForm((current) => ({
+        ...current,
+        [field]: event.target.value,
+      }));
+    };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(EDUVEDA_IIM_LEADS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          full_name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          user_type: form.userType,
+          source_site: "eduveda-iim",
+          source_page: "/",
+        }),
+      });
+
+      const data = (await response.json()) as HeroLeadResponse;
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Lead submission failed");
+      }
+
+      setSuccessMessage(
+        "Thanks. Your details have been submitted and our team will reach out shortly.",
+      );
+      setForm({
+        fullName: "",
+        email: "",
+        phone: "",
+        userType: "",
+      });
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong while submitting your details.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section
       id="hero-section"
@@ -106,14 +198,18 @@ export function HeroSection() {
               Enter the following details to continue
             </h2>
 
-            <form className="mt-5 space-y-4 md:mt-6">
+            <form className="mt-5 space-y-4 md:mt-6" onSubmit={handleSubmit}>
               <label className="block">
                 <span className="font-ui text-[14px] font-[700] leading-none text-[#231d20] md:text-[15px]">
                   Full Name <span className="text-[#ff4b55]">*</span>
                 </span>
                 <input
                   type="text"
+                  required
+                  value={form.fullName}
+                  onChange={updateField("fullName")}
                   placeholder="Enter your full name"
+                  disabled={isSubmitting}
                   className="mt-2.5 h-[54px] w-full rounded-[14px] border border-[#cdced2] bg-white px-4.5 font-ui text-[16px] font-[500] text-[#21191b] outline-none placeholder:text-[#b6b8bd] focus:border-[#0e478e] md:h-[54px] md:text-[16px]"
                 />
               </label>
@@ -123,7 +219,11 @@ export function HeroSection() {
                 </span>
                 <input
                   type="email"
+                  required
+                  value={form.email}
+                  onChange={updateField("email")}
                   placeholder="Enter your email address"
+                  disabled={isSubmitting}
                   className="mt-2.5 h-[54px] w-full rounded-[14px] border border-[#cdced2] bg-white px-4.5 font-ui text-[16px] font-[500] text-[#21191b] outline-none placeholder:text-[#b6b8bd] focus:border-[#0e478e] md:h-[54px] md:text-[16px]"
                 />
               </label>
@@ -133,7 +233,11 @@ export function HeroSection() {
                 </span>
                 <input
                   type="tel"
+                  required
+                  value={form.phone}
+                  onChange={updateField("phone")}
                   placeholder="Enter your phone number"
+                  disabled={isSubmitting}
                   className="mt-2.5 h-[54px] w-full rounded-[14px] border border-[#cdced2] bg-white px-4.5 font-ui text-[16px] font-[500] text-[#21191b] outline-none placeholder:text-[#b6b8bd] focus:border-[#0e478e] md:h-[54px] md:text-[16px]"
                 />
               </label>
@@ -143,22 +247,54 @@ export function HeroSection() {
                   <span className="text-[#ff4b55]">*</span>
                 </legend>
                 <div className="mt-3.5 space-y-3">
-                  {["Student", "Working Professional"].map((label) => (
+                  {[
+                    {
+                      label: "Student",
+                      value: "student" as const,
+                    },
+                    {
+                      label: "Working Professional",
+                      value: "working_professional" as const,
+                    },
+                  ].map((option) => (
                     <label
-                      key={label}
+                      key={option.value}
                       className="flex items-center gap-3 font-ui text-[16px] font-[500] tracking-[-0.03em] text-[#231d20] md:text-[16px]"
                     >
-                      <span className="h-6 w-6 rounded-full border-[1.5px] border-[#8c8d92]" />
-                      <span>{label}</span>
+                      <input
+                        type="radio"
+                        name="user-type"
+                        required
+                        value={option.value}
+                        checked={form.userType === option.value}
+                        onChange={updateField("userType")}
+                        disabled={isSubmitting}
+                        className="peer sr-only"
+                      />
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full border-[1.5px] border-[#8c8d92] peer-checked:border-[#0e478e]">
+                        <span className="h-3 w-3 rounded-full bg-[#0e478e] opacity-0 transition peer-checked:opacity-100" />
+                      </span>
+                      <span>{option.label}</span>
                     </label>
                   ))}
                 </div>
               </fieldset>
+              {successMessage ? (
+                <div className="rounded-[14px] border border-[#cfe0f5] bg-[#edf4ff] px-4 py-3 font-ui text-[14px] font-[600] text-[#0e478e]">
+                  {successMessage}
+                </div>
+              ) : null}
+              {errorMessage ? (
+                <div className="rounded-[14px] border border-[#f3c6cc] bg-[#fff3f5] px-4 py-3 font-ui text-[14px] font-[600] text-[#a53b49]">
+                  {errorMessage}
+                </div>
+              ) : null}
               <button
-                type="button"
-                className="mt-2 h-[54px] w-full rounded-[14px] bg-[#0e478e] font-ui text-[16px] font-[800] uppercase tracking-[0.02em] text-white shadow-[0_14px_28px_rgba(14,71,142,0.22)] md:h-[56px] md:text-[17px]"
+                type="submit"
+                disabled={isSubmitting}
+                className="mt-2 h-[54px] w-full rounded-[14px] bg-[#0e478e] font-ui text-[16px] font-[800] uppercase tracking-[0.02em] text-white shadow-[0_14px_28px_rgba(14,71,142,0.22)] transition disabled:cursor-not-allowed disabled:opacity-70 md:h-[56px] md:text-[17px]"
               >
-                Sign up
+                {isSubmitting ? "Submitting..." : "Sign up"}
               </button>
             </form>
           </div>

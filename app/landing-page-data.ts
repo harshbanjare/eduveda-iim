@@ -263,7 +263,31 @@ export const modules: ModuleItem[] = [
     ],
   },
   {
-    title: "Module 7: Capstone Project",
+    title: "Module 7: Building Funnels and Conversion Journeys",
+    points: [
+      "Understand how landing pages, lead magnets, nurture flows, and offers work together across the funnel.",
+      "Identify drop-off points in customer journeys and improve conversion paths with sharper messaging and UX thinking.",
+      "Use funnel analysis to connect channel activity with business outcomes and revenue-focused decision making.",
+    ],
+  },
+  {
+    title: "Module 8: Personal Branding and Growth Strategy",
+    points: [
+      "Learn how marketers build authority through personal branding, audience development, and trust-based content.",
+      "Create growth plans that combine organic content, community engagement, and performance-led distribution.",
+      "Apply positioning and communication frameworks that support career growth as well as brand growth.",
+    ],
+  },
+  {
+    title: "Module 9: Marketing Operations and AI Workflows",
+    points: [
+      "Structure repeatable workflows for campaign planning, reporting, collaboration, and execution across teams.",
+      "Use AI tools for research, copy iteration, summarization, and workflow acceleration without losing quality control.",
+      "Build a stronger operational mindset around speed, consistency, experimentation, and measurable performance.",
+    ],
+  },
+  {
+    title: "Module 10: Capstone Project",
     points: [
       "Bring strategy, content, channel planning, ads, and measurement into one final execution-driven project.",
       "Present a portfolio-ready capstone that demonstrates structured thinking and practical marketing skill.",

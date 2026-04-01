@@ -102,6 +102,7 @@ export function LearningSection() {
                     alt={tool.label}
                     width={tool.width}
                     height={tool.height}
+                    unoptimized={tool.src.endsWith(".svg")}
                     className="h-auto w-auto max-h-[52px] object-contain"
                   />
                 </div>

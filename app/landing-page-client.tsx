@@ -62,7 +62,7 @@ export default function LandingPageClient() {
         <CompareSection />
         <AboutProgrammeSection />
         <AboutInstituteSection />
-        <SupportSection />
+        {/* <SupportSection /> */}
         <FaqsSection />
         <ContactSection />
       </main>

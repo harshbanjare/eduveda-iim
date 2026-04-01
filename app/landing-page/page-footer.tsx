@@ -21,9 +21,9 @@ export function PageFooter() {
           ))}
         </div>
       </div>
-      <div className="mx-auto w-full max-w-[1240px] px-4 pb-10 text-[13px] font-[600] text-[#777173] md:px-6">
-        Address placeholder: Eduveda campus office details can be added here in
-        the next branding pass.
+      <div className="mx-auto w-full max-w-[1240px] px-4 pb-10 text-[13px] font-[600] leading-6 text-[#777173] md:px-6">
+        CWS Office, 3rd Floor, Control Works Space, 146-C, Hastsal, Uttam
+        Nagar, New Delhi, 110059
       </div>
     </footer>
   );

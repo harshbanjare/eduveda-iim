@@ -13,10 +13,7 @@ import { HeroSection } from "./landing-page/hero-section";
 import { InstructorsSection } from "./landing-page/instructors-section";
 import { LearningSection } from "./landing-page/learning-section";
 import { NbfcPartnersSection } from "./landing-page/nbfc-partners-section";
-import {
-  MobileStickyCta,
-  PageFooter,
-} from "./landing-page/page-footer";
+import { MobileStickyCta, PageFooter } from "./landing-page/page-footer";
 import { PageHeader } from "./landing-page/page-header";
 import { SupportSection } from "./landing-page/support-section";
 import { WhyChooseSection } from "./landing-page/why-choose-section";
@@ -57,11 +54,11 @@ export default function LandingPageClient() {
         <HeroSection />
         <WhyChooseSection />
         <LearningSection />
-        <InstructorsSection />
-        <AdmissionProcessSection />
+        {/* <InstructorsSection /> */}
+        {/* <AdmissionProcessSection /> */}
         <FeeStructureSection />
-        <NbfcPartnersSection />
-        <AudienceSection />
+        {/* <NbfcPartnersSection /> */}
+        {/* <AudienceSection /> */}
         <CompareSection />
         <AboutProgrammeSection />
         <AboutInstituteSection />

@@ -11,7 +11,7 @@ export function AboutProgrammeSection() {
         <div className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr]">
           <div className="relative min-h-[360px] overflow-hidden rounded-[34px] shadow-[0_24px_56px_rgba(20,18,16,0.08)] md:min-h-[540px]">
             <Image
-              src="/future-assets/future-digital-marketing.webp"
+              src="/IMG_2935.PNG"
               alt="Future of digital marketing with applied AI"
               fill
               sizes="(min-width: 1024px) 48vw, 100vw"

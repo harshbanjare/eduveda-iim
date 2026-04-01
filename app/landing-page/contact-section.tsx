@@ -19,12 +19,12 @@ export function ContactSection() {
             <p className="mt-3 text-[16px] leading-7 text-[#5f5658]">
               For programme queries, connect on WhatsApp at{" "}
               <a
-                href="https://api.whatsapp.com/send?phone=918792974750"
+                href="https://api.whatsapp.com/send?phone=918882339893"
                 target="_blank"
                 rel="noreferrer"
                 className="font-[700] text-[#0e478e] underline"
               >
-                +91 87929 74750
+                +91 88823 39893
               </a>
               .
             </p>
@@ -39,10 +39,10 @@ export function ContactSection() {
             <p className="mt-3 text-[16px] leading-7 text-[#5f5658]">
               Reach the admissions team at{" "}
               <a
-                href="mailto:admissions@eduveda.example"
+                href="mailto:eduvedatpc@gmail.com"
                 className="font-[700] text-[#0e478e] underline"
               >
-                admissions@eduveda.example
+                eduvedatpc@gmail.com
               </a>
               .
             </p>

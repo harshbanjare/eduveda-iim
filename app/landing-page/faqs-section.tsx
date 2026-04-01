@@ -60,7 +60,7 @@ export function FaqsSection() {
                 </span>
               </button>
               {isOpen ? (
-                <div className="border-t border-[#f0e8e0] px-5 py-5 text-[15px] leading-7 text-[#5f5658] md:px-7">
+                <div className="whitespace-pre-line border-t border-[#f0e8e0] px-5 py-5 text-[15px] leading-7 text-[#5f5658] md:px-7">
                   {item.answer}
                 </div>
               ) : null}

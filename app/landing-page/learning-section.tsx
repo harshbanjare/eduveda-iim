@@ -75,7 +75,7 @@ const courseDetails = [
   },
   {
     label: "Certification",
-    value: "from IIM Ranchi",
+    value: "from IIM Lucknow",
     icon: <MedalIcon />,
   },
 ];
@@ -86,56 +86,28 @@ export function LearningSection() {
   return (
     <section id="what-you-will-learn" className="bg-white">
       <div className="mx-auto w-full max-w-[1280px] px-4 pb-16 pt-16 md:px-6 md:pb-24 md:pt-24">
-        <div className="grid items-start gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
-          <div className="max-w-[720px]">
-            <h2 className="font-ui text-[34px] font-[800] leading-[1.02] tracking-[-0.05em] text-[#21191b] md:text-[48px]">
-              What Will You Learn?
-            </h2>
-            <div className="mt-6 max-w-[700px] space-y-2.5 font-ui text-[16px] leading-[1.65] text-[#4d4749] md:text-[18px]">
-              <p>
-                Advance your career with a hands-on program that builds
-                practical digital marketing skills across SEO, social media,
-                email, paid ads, and analytics.
-              </p>
-              <p>
-                Learn how to use Generative AI tools like ChatGPT to create
-                content, personalize campaigns, and work more efficiently.
-                Apply data-driven strategies to real-world marketing scenarios
-                and complete a capstone project that brings together strategy,
-                execution, and performance measurement.
-              </p>
-            </div>
-          </div>
-
-          <div className="mx-auto w-full max-w-[540px] lg:justify-self-end">
-            <Image
-              src="/learning-assets/learning-hero.webp"
-              alt="Students learning together"
-              width={540}
-              height={305}
-              className="w-full rounded-[28px] object-cover shadow-[0_18px_40px_rgba(35,26,20,0.08)]"
-              priority={false}
-            />
-          </div>
-        </div>
-
         <div className="mt-12 rounded-[28px] border border-[#edf0f5] bg-white px-6 py-8 shadow-[0_16px_36px_rgba(35,26,20,0.06)] md:mt-14 md:px-10 md:py-10">
           <div className="font-ui text-[18px] font-[700] tracking-[-0.03em] text-[#21191b] md:text-[20px]">
             Toolkit
           </div>
-          <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-6 md:gap-x-12">
+          <div className="mt-7 flex flex-wrap gap-x-6 gap-y-7 md:gap-x-8 md:gap-y-8">
             {toolkit.map((tool) => (
               <div
                 key={tool.label}
-                className="flex min-h-[60px] items-center justify-center"
+                className="flex min-w-[92px] flex-col items-center gap-2 text-center"
               >
-                <Image
-                  src={tool.src}
-                  alt={tool.label}
-                  width={tool.width}
-                  height={tool.height}
-                  className="h-auto w-auto max-h-[52px] object-contain"
-                />
+                <div className="flex h-[52px] items-center justify-center">
+                  <Image
+                    src={tool.src}
+                    alt={tool.label}
+                    width={tool.width}
+                    height={tool.height}
+                    className="h-auto w-auto max-h-[52px] object-contain"
+                  />
+                </div>
+                <div className="font-ui text-[13px] font-[700] tracking-[-0.02em] text-[#4d4749] md:text-[14px]">
+                  {tool.label}
+                </div>
               </div>
             ))}
           </div>

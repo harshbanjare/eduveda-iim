@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { heroStats } from "../landing-page-data";
 
@@ -19,6 +20,12 @@ interface HeroLeadResponse {
   success: boolean;
   message: string;
 }
+
+const registeredStudentAvatars = [
+  "/hero-assets/registered-student-1.jpg",
+  "/hero-assets/registered-student-2.jpeg",
+  "/hero-assets/registered-student-3.jpeg",
+];
 
 function VideoIcon() {
   return (
@@ -145,7 +152,7 @@ export function HeroSection() {
               {[
                 {
                   icon: <VideoIcon />,
-                  text: "Learn from IIM Ranchi's expert faculty",
+                  text: "Learn from IIM Lucknow's expert faculty",
                 },
                 {
                   icon: <SparkIcon />,
@@ -172,20 +179,23 @@ export function HeroSection() {
 
             <div className="mt-6 flex items-center gap-4 md:mt-8">
               <div className="flex -space-x-3">
-                {[
-                  "from-[#375f98] to-[#8ab2e8]",
-                  "from-[#6c4a3f] to-[#e1b6a2]",
-                  "from-[#283457] to-[#9eaee0]",
-                  "from-[#653d44] to-[#f0a4ba]",
-                ].map((gradient, index) => (
+                {registeredStudentAvatars.map((src, index) => (
                   <div
-                    key={gradient}
-                    className={`h-[42px] w-[42px] rounded-full border-[3px] border-white bg-gradient-to-br ${gradient} shadow-[0_8px_20px_rgba(0,0,0,0.14)] md:h-[48px] md:w-[48px] ${index === 0 ? "" : ""}`}
-                  />
+                    key={src}
+                    className="relative h-[42px] w-[42px] overflow-hidden rounded-full border-[3px] border-white bg-[#d8e6fb] shadow-[0_8px_20px_rgba(0,0,0,0.14)] md:h-[48px] md:w-[48px]"
+                  >
+                    <Image
+                      src={src}
+                      alt={`Registered student ${index + 1}`}
+                      fill
+                      sizes="48px"
+                      className="object-cover"
+                    />
+                  </div>
                 ))}
               </div>
               <p className="font-ui text-[16px] font-[700] leading-none tracking-[-0.03em] text-[#131012] md:text-[17px]">
-                1.2K+ students have already registered
+                2.3K+ students have already registered
               </p>
             </div>
           </div>
@@ -257,10 +267,7 @@ export function HeroSection() {
                       value: "working_professional" as const,
                     },
                   ].map((option) => (
-                    <label
-                      key={option.value}
-                      className="flex items-center gap-3 font-ui text-[16px] font-[500] tracking-[-0.03em] text-[#231d20] md:text-[16px]"
-                    >
+                    <label key={option.value} className="block cursor-pointer">
                       <input
                         type="radio"
                         name="user-type"
@@ -269,12 +276,32 @@ export function HeroSection() {
                         checked={form.userType === option.value}
                         onChange={updateField("userType")}
                         disabled={isSubmitting}
-                        className="peer sr-only"
+                        className="sr-only"
                       />
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full border-[1.5px] border-[#8c8d92] peer-checked:border-[#0e478e]">
-                        <span className="h-3 w-3 rounded-full bg-[#0e478e] opacity-0 transition peer-checked:opacity-100" />
+                      <span
+                        className={`flex items-center justify-between rounded-[14px] border px-4 py-4 font-ui text-[16px] font-[600] tracking-[-0.03em] text-[#231d20] transition md:text-[16px] ${
+                          form.userType === option.value
+                            ? "border-[#0e478e] bg-[#edf4ff]"
+                            : "border-[#cdced2] bg-white"
+                        } ${isSubmitting ? "cursor-not-allowed opacity-70" : ""}`}
+                      >
+                        <span>{option.label}</span>
+                        <span
+                          className={`flex h-6 w-6 items-center justify-center rounded-full border-[1.5px] transition ${
+                            form.userType === option.value
+                              ? "border-[#0e478e] bg-[#0e478e] text-white"
+                              : "border-[#a7adb7] bg-white text-transparent"
+                          }`}
+                        >
+                          <svg
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            className="h-3.5 w-3.5 fill-current"
+                          >
+                            <path d="M7.8 13.6 4.7 10.5a1 1 0 1 0-1.4 1.4l3.8 3.8a1 1 0 0 0 1.4 0l8.2-8.2a1 1 0 1 0-1.4-1.4L7.8 13.6Z" />
+                          </svg>
+                        </span>
                       </span>
-                      <span>{option.label}</span>
                     </label>
                   ))}
                 </div>

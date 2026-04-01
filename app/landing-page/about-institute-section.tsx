@@ -8,8 +8,8 @@ export function AboutInstituteSection() {
         <div className="relative">
           <div className="relative min-h-[300px] overflow-hidden rounded-[34px] md:min-h-[420px]">
             <Image
-              src="/institute-assets/about-iim-ranchi.webp"
-              alt="About IIM Ranchi campus"
+              src="/institute-assets/about-iim-lucknow-campus.jpg"
+              alt="About IIM Lucknow campus"
               fill
               sizes="100vw"
               className="object-cover"
@@ -17,11 +17,11 @@ export function AboutInstituteSection() {
           </div>
           <div className="relative mx-auto -mt-10 max-w-[1160px] rounded-[34px] border border-[#d9dde4] bg-white px-6 py-6 shadow-[0_24px_56px_rgba(20,18,16,0.08)] md:-mt-14 md:px-12 md:py-8">
             <h2 className="text-center font-ui text-[28px] font-[800] leading-[1.04] tracking-[-0.05em] text-[#21191b] md:text-[42px]">
-              About IIM Ranchi
+              About IIM Lucknow
             </h2>
 
             <p className="mx-auto mt-5 max-w-[65ch] text-center font-ui text-[15px] leading-[1.6] text-[#3f3a3c] md:text-[16px]">
-              The Indian Institute of Management Ranchi is a nationally recognised
+              The Indian Institute of Management Lucknow is a nationally recognised
               management school known for rigorous academics, applied research,
               leadership development, and strong industry engagement. Its learning
               ecosystem emphasizes multidisciplinary thinking, innovation, and

@@ -1,22 +1,68 @@
-import { feeOptions } from "../landing-page-data";
+const plans = [
+  {
+    title: "Self Paced",
+    price: "Rs 9,999",
+    duration: "3 months",
+  },
+  {
+    title: "Mentor Led",
+    price: "Rs 24,999",
+    duration: "6 months",
+  },
+] as const;
 
-const feeRows = [
+const comparisonRows = [
   {
-    label: "Registration Fee",
-    note: "(non-refundable)",
-    getValue: (index: number) => feeOptions[index].registrationFee,
+    label: "Duration",
+    selfPaced: "3 months",
+    mentorLed: "6 months",
   },
   {
-    label: "Program Fee",
-    note: "(non-refundable)",
-    getValue: (index: number) => feeOptions[index].programFee,
+    label: "Training",
+    selfPaced: "Recorded lectures",
+    mentorLed: "Live lectures in cohort format",
   },
   {
-    label: "Total Fees",
-    note: "",
-    getValue: (index: number) => feeOptions[index].totalFee,
+    label: "Doubt Sessions",
+    selfPaced: "Not included",
+    mentorLed: "Live doubt clearing sessions",
   },
-];
+  {
+    label: "Certifications",
+    selfPaced: "AWS Certification",
+    mentorLed: "AWS Certificate + IIM Lucknow Certificate",
+  },
+  {
+    label: "Level",
+    selfPaced: "Basic to intermediate",
+    mentorLed: "Basic to advanced",
+  },
+  {
+    label: "Projects",
+    selfPaced: "2 projects: 1 major, 1 minor",
+    mentorLed: "3 projects: 2 major, 1 minor",
+  },
+  {
+    label: "AI Tools Access",
+    selfPaced: "Not included",
+    mentorLed: "Free tools access",
+  },
+  {
+    label: "Placement Assistance",
+    selfPaced: "Not included",
+    mentorLed: "Placement assistance, study material, and mock test series",
+  },
+  {
+    label: "Mentorship",
+    selfPaced: "Not included",
+    mentorLed: "One-to-one mentorship with IIM faculty",
+  },
+  {
+    label: "Bonus",
+    selfPaced: "Not included",
+    mentorLed: "1-hour meeting with company founder and director",
+  },
+] as const;
 
 export function FeeStructureSection() {
   return (
@@ -26,133 +72,97 @@ export function FeeStructureSection() {
           Fee Structure
         </h2>
 
-        <div className="mx-auto mt-10 rounded-[36px] border border-[#d9dde4] bg-white p-5 shadow-[0_22px_50px_rgba(20,18,16,0.06)] md:mt-12 md:p-10">
-          <div className="rounded-[24px] border border-[#dfe4eb] bg-white shadow-[0_14px_32px_rgba(20,18,16,0.04)]">
-            <div className="grid items-center md:grid-cols-[1fr_0.55fr]">
-              <div className="px-6 py-5 md:px-8">
-                <div className="font-ui text-[24px] font-[800] leading-none tracking-[-0.04em] text-[#21191b] md:text-[28px]">
-                  Application Fee
+        <div className="mx-auto mt-10 rounded-[36px] border border-[#d9dde4] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbff_28%,#edf5ff_100%)] p-5 shadow-[0_22px_50px_rgba(20,18,16,0.06)] md:mt-12 md:p-10">
+          <div className="grid gap-6 md:grid-cols-2">
+            {plans.map((plan, index) => (
+              <article
+                key={plan.title}
+                className={`rounded-[30px] border p-6 shadow-[0_16px_36px_rgba(20,18,16,0.04)] md:p-8 ${
+                  index === 1
+                    ? "border-[#bcd2ef] bg-[linear-gradient(180deg,#f7fbff_0%,#e9f3ff_100%)]"
+                    : "border-[#dde3ea] bg-white"
+                }`}
+              >
+                <div className="font-ui text-[15px] font-[700] uppercase tracking-[0.12em] text-[#0e478e]">
+                  Plan {index + 1}
                 </div>
-                <div className="mt-2 font-ui text-[15px] font-[600] text-[#0e478e] md:text-[16px]">
-                  (Non Refundable)
+                <div className="mt-3 font-ui text-[30px] font-[800] leading-[1.02] tracking-[-0.05em] text-[#21191b] md:text-[36px]">
+                  {plan.title}
                 </div>
-              </div>
-              <div className="border-t border-[#e3e7ee] px-6 py-5 text-center md:border-l md:border-t-0 md:px-8">
-                <div className="font-ui text-[24px] font-[800] tracking-[-0.04em] text-[#21191b] md:text-[28px]">
-                  <span className="mr-3 text-[#4b5667] line-through decoration-[3px] decoration-[#e53935]">
-                    ₹500
-                  </span>
-                  <span>₹100</span>
+                <div className="mt-5 font-ui text-[38px] font-[800] leading-none tracking-[-0.05em] text-[#0e478e] md:text-[46px]">
+                  {plan.price}
                 </div>
-              </div>
-            </div>
+                <div className="mt-5 inline-flex rounded-full bg-[#eef5ff] px-4 py-2 font-ui text-[14px] font-[700] text-[#244a7d]">
+                  Duration: {plan.duration}
+                </div>
+              </article>
+            ))}
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-[0.95fr_1.45fr] lg:gap-10">
-            <div className="hidden lg:block">
-              <div className="pt-[150px]">
-                {feeRows.map((row, index) => (
-                  <div
-                    key={row.label}
-                    className={`${index !== 0 ? "border-t border-[#dfe4eb]" : ""} py-12`}
-                  >
-                    <div className="font-ui text-[22px] font-[800] tracking-[-0.04em] text-[#21191b]">
-                      {row.label}
-                    </div>
-                    {row.note ? (
-                      <div className="mt-2 font-ui text-[15px] font-[600] text-[#0e478e]">
-                        {row.note}
-                      </div>
-                    ) : null}
-                  </div>
-                ))}
+          <div className="mt-8 overflow-hidden rounded-[30px] border border-[#dbe3ec] bg-white shadow-[0_16px_36px_rgba(20,18,16,0.04)]">
+            <div className="hidden grid-cols-[0.9fr_1fr_1fr] bg-[#f7fbff] md:grid">
+              <div className="border-r border-[#dbe3ec] px-6 py-5 font-ui text-[16px] font-[800] text-[#21191b]">
+                Modules
+              </div>
+              <div className="border-r border-[#dbe3ec] px-6 py-5 font-ui text-[16px] font-[800] text-[#21191b]">
+                Self Paced
+              </div>
+              <div className="px-6 py-5 font-ui text-[16px] font-[800] text-[#21191b]">
+                Mentor Led
               </div>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              {feeOptions.map((option, optionIndex) => (
+            <div className="md:hidden">
+              {comparisonRows.map((row, index) => (
                 <article
-                  key={option.title}
-                  className="overflow-hidden rounded-[30px] bg-[linear-gradient(180deg,#f7fbff_0%,#eff7ff_36%,#e4f0ff_100%)] p-5 shadow-[0_16px_36px_rgba(20,18,16,0.04)]"
+                  key={row.label}
+                  className={`${index !== 0 ? "border-t border-[#e4e9f0]" : ""} px-5 py-5`}
                 >
-                  <div className="rounded-[24px] bg-white/85 px-6 py-6 shadow-[inset_0_0_0_1px_rgba(223,228,235,0.9)]">
-                    <div className="font-ui text-[16px] font-[700] text-[#0e478e]">
-                      Option {optionIndex + 1}
+                  <div className="font-ui text-[17px] font-[800] tracking-[-0.03em] text-[#21191b]">
+                    {row.label}
+                  </div>
+                  <div className="mt-4 rounded-[18px] bg-[#f7fbff] px-4 py-4">
+                    <div className="font-ui text-[13px] font-[800] uppercase tracking-[0.08em] text-[#0e478e]">
+                      Self Paced
                     </div>
-                    <div className="mt-1 font-ui text-[26px] font-[800] leading-[1.08] tracking-[-0.04em] text-[#21191b]">
-                      {option.title}
-                      {option.title === "EMI" ? (
-                        <span className="ml-2 text-[15px] font-[700] tracking-normal text-[#332d2f] md:text-[16px]">
-                          (Through Our NBFC Partners)
-                        </span>
-                      ) : null}
+                    <div className="mt-2 font-ui text-[15px] leading-[1.55] text-[#4a4547]">
+                      {row.selfPaced}
                     </div>
                   </div>
-
-                  <div className="lg:hidden">
-                    {feeRows.map((row, index) => (
-                      <div
-                        key={row.label}
-                        className={`${index !== 0 ? "border-t border-[#d3ddea]" : ""} px-2 py-6`}
-                      >
-                        <div className="font-ui text-[16px] font-[800] tracking-[-0.03em] text-[#21191b]">
-                          {row.label}
-                        </div>
-                        {row.note ? (
-                          <div className="mt-1 font-ui text-[14px] font-[600] text-[#0e478e]">
-                            {row.note}
-                          </div>
-                        ) : null}
-                        <div
-                          className={`mt-4 font-ui text-[24px] font-[800] tracking-[-0.04em] ${
-                            row.label === "Total Fees"
-                              ? "text-[#0e478e]"
-                              : "text-[#21191b]"
-                          }`}
-                        >
-                          {row.getValue(optionIndex)}
-                        </div>
-                        {row.label === "Total Fees" ? (
-                          <div className="mt-1 font-ui text-[14px] font-[700] text-[#6b6567]">
-                            {option.note}
-                          </div>
-                        ) : null}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="hidden lg:block">
-                    {feeRows.map((row, index) => (
-                      <div
-                        key={row.label}
-                        className={`${index !== 0 ? "border-t border-[#d3ddea]" : ""} px-2 py-12`}
-                      >
-                        <div
-                          className={`font-ui text-[24px] font-[800] tracking-[-0.04em] ${
-                            row.label === "Total Fees"
-                              ? "text-[#0e478e]"
-                              : "text-[#21191b]"
-                          }`}
-                        >
-                          {row.getValue(optionIndex)}
-                        </div>
-                        {row.label === "Total Fees" ? (
-                          <div className="mt-2 font-ui text-[14px] font-[700] text-[#6b6567]">
-                            {option.note}
-                          </div>
-                        ) : null}
-                      </div>
-                    ))}
+                  <div className="mt-3 rounded-[18px] bg-[#edf5ff] px-4 py-4">
+                    <div className="font-ui text-[13px] font-[800] uppercase tracking-[0.08em] text-[#0e478e]">
+                      Mentor Led
+                    </div>
+                    <div className="mt-2 font-ui text-[15px] leading-[1.55] text-[#4a4547]">
+                      {row.mentorLed}
+                    </div>
                   </div>
                 </article>
               ))}
             </div>
+
+            <div className="hidden md:block">
+              {comparisonRows.map((row, index) => (
+                <div
+                  key={row.label}
+                  className={`grid grid-cols-[0.9fr_1fr_1fr] ${
+                    index !== 0 ? "border-t border-[#e4e9f0]" : ""
+                  }`}
+                >
+                  <div className="border-r border-[#e4e9f0] px-6 py-6 font-ui text-[17px] font-[800] tracking-[-0.03em] text-[#21191b]">
+                    {row.label}
+                  </div>
+                  <div className="border-r border-[#e4e9f0] px-6 py-6 font-ui text-[15px] leading-[1.6] text-[#4a4547]">
+                    {row.selfPaced}
+                  </div>
+                  <div className="px-6 py-6 font-ui text-[15px] leading-[1.6] text-[#4a4547]">
+                    {row.mentorLed}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-
-        <p className="mt-6 text-center font-ui text-[15px] font-[700] italic tracking-[-0.03em] text-[#4c4950] md:text-[16px]">
-          *18% GST extra, as applicable
-        </p>
       </div>
     </section>
   );

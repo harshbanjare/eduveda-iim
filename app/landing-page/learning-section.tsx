@@ -96,14 +96,20 @@ export function LearningSection() {
                 key={tool.label}
                 className="flex min-w-[92px] flex-col items-center gap-2 text-center"
               >
-                <div className="flex h-[52px] items-center justify-center">
+                <div
+                  className="relative flex items-center justify-center"
+                  style={{
+                    width: `${tool.width}px`,
+                    height: `${Math.min(tool.height, 52)}px`,
+                  }}
+                >
                   <Image
                     src={tool.src}
                     alt={tool.label}
                     width={tool.width}
                     height={tool.height}
                     unoptimized={tool.src.endsWith(".svg")}
-                    className="h-auto w-auto max-h-[52px] object-contain"
+                    className="h-full w-full object-contain"
                   />
                 </div>
                 <div className="font-ui text-[13px] font-[700] tracking-[-0.02em] text-[#4d4749] md:text-[14px]">
